@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a30daystolearningeverything.R;
+import com.example.a30daystolearningeverything.model.RecyclerModel;
 
 import java.util.List;
 
@@ -27,17 +28,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.items_recycler, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.items_recycler, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtDays.setText(recyclerModels.get(position).getDays());
-        holder.txtTitle.setText(recyclerModels.get(position).getTitle());
-        holder.image.setImageResource(recyclerModels.get(position).getImage());
-        holder.txtDescription.setText(recyclerModels.get(position).getDescription());
+        RecyclerModel model = recyclerModels.get(position);
+        holder.txtDays.setText(model.getDays());
+        holder.txtTitle.setText(model.getTitle());
+        holder.image.setImageResource(model.getImage());
+        holder.txtDescription.setText(model.getDescription());
     }
 
     @Override
@@ -45,7 +46,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return recyclerModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtDays, txtTitle, txtDescription;
         ImageView image;
 
